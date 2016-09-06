@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +49,7 @@
 				<nav id="main-nav">
 
 					<ul class="clearfix">
-						<li><a href="/carrinho" rel="nofollow">Carrinho</a></li>
+						<li><a href="/cart" rel="nofollow">Carrinho (${carrinhoCompras.quantidade}) </a></li>
 
 						<li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre
 								Nós</a></li>
@@ -91,7 +92,7 @@
 					<span class="product-author-link"> </span>
 				</p>
 
-				<form action="/carrinho/add" method="post" class="container">
+				<form action='<c:url value="/carrinho/add" />' method="post" class="container">
 					<ul id="variants" class="clearfix">
 						<input type="hidden" name="produtoId" value="${produto.id}" />
 						<c:forEach items="${produto.precos}" var="preco">
@@ -114,7 +115,8 @@
 				Número de páginas: <span>${produto.paginas}</span>
 			</p>
 			<p></p>
-			<p>Data de publicação: ${produto.dataLancamento.time}</p>
+			
+			<p>Data de Lançamento <fmt:formatDate value="${produto.dataLancamento.time}" pattern="dd/MM/yyyy" /></p>
 			<p>
 				Encontrou um erro? <a href='/submissao-errata' target='_blank'>Submeta
 					uma errata</a>
